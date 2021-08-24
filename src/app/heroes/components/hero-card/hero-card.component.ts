@@ -5,6 +5,9 @@ import { Hero } from '../../interfaces/heroes.interfaces';
   selector: 'app-hero-card',
   templateUrl: './hero-card.component.html',
   styles: [
+    `.mat-card{
+      margin: 10px
+  }`
   ]
 })
 export class HeroCardComponent implements OnInit {
