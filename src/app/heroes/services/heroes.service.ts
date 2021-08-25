@@ -23,4 +23,7 @@ export class HeroesService {
   getSuggestions(searchTerm: string): Observable<Hero[]>{
     return this.http.get<Hero[]>(`${this.baseUrl}/heroes?q=${searchTerm}&_limit=6`)
   }
+  addNewHero(hero: Hero): Observable<Hero>{
+    return this.http.post<Hero>(`${this.baseUrl}/heroes`, hero)
+  }
 }

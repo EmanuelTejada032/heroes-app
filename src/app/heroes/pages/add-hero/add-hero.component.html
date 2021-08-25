@@ -3,41 +3,44 @@
 
 <div fxLayout="row" fxLayoutGap="40px">
     <div fxFlex="50" fxLayout="column">
-        <div  fxLayout="row" fxLayoutGap="40px">
+        <div  fxLayout="row" fxLayoutGap="40px" fxLayout.sm="column">
             <mat-form-field fxFlex="100">
                 <mat-label>Super Hero</mat-label>
-                <input type="text" matInput required>
+                <input type="text" matInput required [(ngModel)]="hero.superhero">
             </mat-form-field>
             <mat-form-field fxFlex="100">
                 <mat-label>Alter Ego</mat-label>
-                <input type="text" matInput required>
+                <input type="text" matInput required [(ngModel)]="hero.alter_ego">
             </mat-form-field>
         </div>
         <mat-form-field>
             <mat-label>First Appearance</mat-label> 
             <input type="text"
                    matInput
-                   required>
+                   required
+                   [(ngModel)]="hero.first_appearance">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Characters</mat-label> 
             <input type="text"
                    matInput
-                   required>
+                   required
+                   [(ngModel)]="hero.characters">
         </mat-form-field>
         <mat-form-field>
-                <mat-select>
-                    <mat-option *ngFor="let publisher of publishers" value="publisher.description">{{publisher.description}}</mat-option>
+                <mat-select required [(ngModel)]="hero.publisher">
+                    <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.description}}</mat-option>
                 </mat-select>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Img URL</mat-label> 
             <input type="url"
                    matInput
-                   required>
+                   required
+                   [(ngModel)]="hero.alt_img">
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" (click)="save()">
             <mat-icon>saves</mat-icon>
             Save
         </button>
