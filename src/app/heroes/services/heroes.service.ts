@@ -16,7 +16,7 @@ export class HeroesService {
     return this.http.get<Hero[]>(`${this.baseUrl}/heroes`)
   }
 
-  getHeroById(id:number): Observable<Hero>{
+  getHeroById(id:string): Observable<Hero>{
     return this.http.get<Hero>(`${this.baseUrl}/heroes/${id}`)
   }
 

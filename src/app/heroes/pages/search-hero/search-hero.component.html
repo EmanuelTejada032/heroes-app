@@ -3,22 +3,25 @@
         <h1>Search Heroes</h1>
         <mat-divider></mat-divider>
     </div>
-    <div>
+    <div fxLayout="column">
         <h3>Search</h3>
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Search</mat-label>
-            <input type="text" placeholder="Search Hero" aria-label="Search" matInput [(ngModel)]="searchTerm" [matAutocomplete]="auto" (input)="searchInput()">
+            <input type="text" placeholder="Search Hero" aria-label="Search" matInput [(ngModel)]="searchTerm" [matAutocomplete]="auto" (input)="onSearchInputChange()">
             <mat-autocomplete #auto="matAutocomplete"
                               autoActiveFirstOption
                               (optionSelected)="optionSelected($event)">
                 <mat-option *ngFor="let hero of heroes" [value]="hero">
                     {{hero.superhero}}
                 </mat-option>
+                <mat-option *ngIf="noHeroesFound">
+                    No heroes found with {{searchTerm}}
+                </mat-option>
             </mat-autocomplete>
         </mat-form-field>
     </div>
     <div>
-        <pre>{{hero | json}}</pre>
+        <pre *ngIf="!noHeroesFound">{{hero | json}}</pre>
     </div>
 </div>
 

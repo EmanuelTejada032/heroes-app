@@ -14,23 +14,30 @@ export class SearchHeroComponent implements OnInit {
   heroes: Hero[] = [];
   searchTerm: string = "";
   hero!: Hero;
+  noHeroesFound: boolean = false
 
   constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
   }
 
-  searchInput(){
-    this.heroesService.getSuggestions(this.searchTerm)
-        .subscribe( heroes => this.heroes = heroes)
+  onSearchInputChange(){
+    this.heroesService.getSuggestions(this.searchTerm.trim())
+        .subscribe( heroes =>{
+          this.heroes = heroes;
+          (!heroes.length)? this.noHeroesFound = true: this.noHeroesFound = false;
+        })
   }
 
   optionSelected(event: MatAutocompleteSelectedEvent){
-    let hero = event.option.value
-    this.searchTerm = hero.superhero
-    this.heroesService.getHeroById(hero.id)
-        .subscribe( hero => this.hero = hero)
-
+    if(event.option.value){ //check if selectEvent is getting a hero
+      const hero: Hero = event.option.value
+      this.searchTerm = hero.superhero
+      this.heroesService.getHeroById(hero.id!)
+        .subscribe(hero => this.hero = hero)
+    }else{
+      this.searchTerm='';
+    }
   }
 
 }
