@@ -18,6 +18,7 @@ import { HeroesService } from '../../services/heroes.service';
 })
 export class AddHeroComponent implements OnInit {
 
+
   publishers = [
     {
       id: "DC Comics",
@@ -60,8 +61,11 @@ export class AddHeroComponent implements OnInit {
       this.heroesService.addNewHero(this.hero)
           .subscribe( hero => this.router.navigate(["/heroes/edit", hero.id]))
     }
+  }
 
-   
+  delete(){
+    this.heroesService.deleteHero(`${this.hero.id}`)
+        .subscribe( res => this.router.navigate(["/heroes"]))
   }
 
 }

@@ -40,11 +40,17 @@
                    [(ngModel)]="hero.alt_img">
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" (click)="save()">
-            <mat-icon>saves</mat-icon>
-            Save
-        </button>
+        <div fxLayout="row" fxLayoutGap="40px" >
+            <button mat-raised-button color="primary" (click)="save()"  fxFlex="100">
+                <mat-icon>saves</mat-icon>
+                Save
+            </button>
         
+            <button mat-raised-button color="warn" (click)="delete()" *ngIf="hero.id"  fxFlex="100">
+                <mat-icon>remove</mat-icon>
+                Delete
+            </button>
+        </div>
     </div>
 
     <div fxFlex="50">

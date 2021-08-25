@@ -8,11 +8,6 @@ import { Hero } from '../../interfaces/heroes.interfaces';
     `.mat-card{
       margin: 10px
     }
-    img{
-      width: 177px;
-      height: 285px
-    }
-    
   `
   ]
 })

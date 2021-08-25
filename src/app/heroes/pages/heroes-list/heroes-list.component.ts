@@ -6,12 +6,6 @@ import { HeroesService } from '../../services/heroes.service';
   selector: 'app-heroes-list',
   templateUrl: './heroes-list.component.html',
   styles: [
-    `
-    img{
-      width: 177px;
-      height: 285px
-    }
-    `
   ]
 })
 export class HeroesListComponent implements OnInit {
