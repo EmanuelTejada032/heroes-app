@@ -8,12 +8,17 @@
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Search</mat-label>
             <input type="text" placeholder="Search Hero" aria-label="Search" matInput [(ngModel)]="searchTerm" [matAutocomplete]="auto" (input)="searchInput()">
-            <mat-autocomplete #auto="matAutocomplete">
+            <mat-autocomplete #auto="matAutocomplete"
+                              autoActiveFirstOption
+                              (optionSelected)="optionSelected($event)">
                 <mat-option *ngFor="let hero of heroes" [value]="hero">
                     {{hero.superhero}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+    </div>
+    <div>
+        <pre>{{hero | json}}</pre>
     </div>
 </div>
 
