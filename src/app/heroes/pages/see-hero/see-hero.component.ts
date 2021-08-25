@@ -8,6 +8,11 @@ import {switchMap} from "rxjs/operators"
   selector: 'app-see-hero',
   templateUrl: './see-hero.component.html',
   styles: [
+    `
+    img{
+      width: 500px;
+      height: 800px
+    }`
   ]
 })
 export class SeeHeroComponent implements OnInit {
@@ -21,7 +26,6 @@ export class SeeHeroComponent implements OnInit {
         .pipe(
           switchMap( ({id}) => this.heroServices.getHeroById(id)), //switch to new observable with the return of subscription to activated route params
         ).subscribe( hero =>{
-           console.log(hero)
            this.hero = hero
         })
   }

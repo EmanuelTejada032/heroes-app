@@ -7,7 +7,13 @@ import { Hero } from '../../interfaces/heroes.interfaces';
   styles: [
     `.mat-card{
       margin: 10px
-  }`
+    }
+    img{
+      width: 177px;
+      height: 285px
+    }
+    
+  `
   ]
 })
 export class HeroCardComponent implements OnInit {

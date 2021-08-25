@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+
+
 import { Hero, Publisher } from '../../interfaces/heroes.interfaces';
 import { HeroesService } from '../../services/heroes.service';
 
 @Component({
   selector: 'app-add-hero',
   templateUrl: './add-hero.component.html',
-  styles: [
-  ]
+  styles: [`
+    img{
+      width: 500px;
+      height: 800px
+    }
+  `]
 })
 export class AddHeroComponent implements OnInit {
 
@@ -29,15 +37,31 @@ export class AddHeroComponent implements OnInit {
     characters:       "",
     alt_img:          ""
   }
-  constructor(private heroesService: HeroesService) { }
+  constructor(private heroesService: HeroesService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    if(this.router.url.includes("edit")){
+      this.activatedRoute.params.pipe(
+      switchMap( ({id}) => this.heroesService.getHeroById(id))
+      ).subscribe( hero => this.hero = hero)
+    }
+    
   }
 
   save(){
-    if(!this.hero.superhero.trim().length) return; //check if there superhero input
-    this.heroesService.addNewHero(this.hero)
-        .subscribe( hero => console.log(hero))
+
+    if(this.hero.id){
+      console.log("edit hero")
+      this.heroesService.editHero(this.hero)
+          .subscribe( hero => console.log("Updated hero"))
+    }else{
+      console.log("create hero")
+      if(!this.hero.superhero.trim().length) return; //check if there superhero input
+      this.heroesService.addNewHero(this.hero)
+          .subscribe( hero => this.router.navigate(["/heroes/edit", hero.id]))
+    }
+
+   
   }
 
 }
