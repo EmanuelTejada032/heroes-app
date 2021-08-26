@@ -21,7 +21,11 @@ export class LoginComponent implements OnInit {
            console.log(user);
           (user.id)? this.router.navigate(["/heroes"]): null;
         })
-    // this.router.navigate(["/heroes"])
+    
+  }
+  withoutLoginClick(){
+    this.authServices.logout()
+    this.router.navigate(["/heroes"])
   }
 
 }
