@@ -15,7 +15,6 @@ export class HeroesListComponent implements OnInit {
   constructor(private heroesService: HeroesService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    console.log(this.authService.auth)
     this.heroesService.getHeroes().subscribe( heroes => this.heroesList = heroes)
   }
 

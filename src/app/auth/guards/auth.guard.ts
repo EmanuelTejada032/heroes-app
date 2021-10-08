@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router){}
 
+  //prevent modules from being activated
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -19,6 +20,7 @@ export class AuthGuard implements CanActivate, CanLoad {
                  .pipe(
                    tap( isAuth => {
                      if(!isAuth){
+                       console.log("blocked by canActivate")
                        this.router.navigate(["/auth/login"])
                      }
                    })
@@ -30,6 +32,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       // return false;
   }
 
+  // Prevent modules from being charged, but not activated once charged
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean  {
@@ -38,6 +41,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       .pipe(
         tap( isAuth => {
           if(!isAuth){
+            console.log("blocked by canLoad")
             this.router.navigate(["/auth/login"])
           }
         })

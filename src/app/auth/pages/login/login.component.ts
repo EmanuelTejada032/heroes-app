@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   onLoginClick(){
     this.authServices.login()
         .subscribe( user => {
-           console.log(user);
           (user.id)? this.router.navigate(["/heroes"]): null;
         })
     

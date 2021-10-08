@@ -26,9 +26,10 @@ export class AuthService {
       return of(false)// of creates observable with value provided as argument
     }
 
-    return this.http.get<Auth>(`${this.baseUrl}/users/1`)
-               .pipe(
-                 map( auth => {
+    return this.http.get<Auth>(`${this.baseUrl}/users/1`) //Return an auth type object
+               .pipe( 
+                 map( auth => { //Used to transform what is returned from the observable subscription
+                  console.log('Map', auth)
                    this._auth = auth;
                    return true
                  })
@@ -37,8 +38,11 @@ export class AuthService {
 
   login(){
     return this.http.get<Auth>(`${this.baseUrl}/users/1`)
-                    .pipe(
-                      tap( auth => this._auth = auth),
+                    .pipe(//Using .pipe avoid destroy the subscribe for the login() on loginComponent
+                      tap( auth =>{
+                        this._auth = auth
+                        console.log('tap', auth)
+                      } ), //The tap get the subscribe reponse before subscribe on loginComponent
                       tap( auth => localStorage.setItem("token", auth.id))
                     )
   }
